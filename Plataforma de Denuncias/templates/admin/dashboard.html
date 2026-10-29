@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="container">
+    <h2>Painel Administrativo</h2>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Total de Denúncias</h3>
+            <p class="stat-num">{{ total }}</p>
+        </div>
+        <div class="stat-card">
+            <h3>Aguardando Triagem</h3>
+            <p class="stat-num">{{ recebidas }}</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <a href="/admin/denuncias" class="btn btn-primary">Gerenciar Denúncias</a>
+    </div>
+</section>
+{% endblock %}

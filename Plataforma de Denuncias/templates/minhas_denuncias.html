@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="container">
+    <h2>Minhas Denúncias Identificadas</h2>
+    <p>Abaixo estão listadas as denúncias enviadas vinculadas à sua conta.</p>
+
+    {% if denuncias %}
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Protocolo</th>
+                    <th>Categoria</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in denuncias %}
+                <tr>
+                    <td><code>{{ d.protocolo }}</code></td>
+                    <td>{{ d.categoria }}</td>
+                    <td>{{ d.data_registro }}</td>
+                    <td><span class="badge">{{ d.status }}</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="empty-state">
+            <p>Você ainda não possui denúncias identificadas cadastradas.</p>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

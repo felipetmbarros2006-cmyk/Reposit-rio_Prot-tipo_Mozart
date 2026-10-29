@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="container form-container">
+    <h2>Registrar Denúncia de Maus-Tratos</h2>
+    
+    <div class="alert alert-warning">
+        <p><strong>Aviso Importante:</strong> Este envio não garante atendimento imediato nem substitui os serviços públicos de emergência (190 / 197).</p>
+        <p>Evite anexar imagens que exponham rostos de pessoas, placas de veículos ou documentos de terceiros.</p>
+    </div>
+
+    <form action="/denunciar" method="POST" enctype="multipart/form-data">
+        
+        <div class="form-group checkbox-group">
+            {% if session.get('user_id') %}
+                <label>
+                    <input type="checkbox" name="anonimo" value="true">
+                    Enviar como <strong>Anônimo</strong> (Seus dados cadastrais não serão vinculados internamente)
+                </label>
+                <small class="help-text">Se desmarcado, a equipe administradora da plataforma poderá identificar sua conta em caso de necessidade de contato, preservando o sigilo público.</small>
+            {% else %}
+                <label>
+                    <input type="checkbox" name="anonimo" value="true" checked disabled>
+                    Modo Anônimo (Você não está logado. Nenhuma informação pessoal será gravada).
+                </label>
+                <small class="help-text"><a href="/login">Faça login</a> para registrar a denúncia vinculada ao seu perfil.</small>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="categoria">Categoria da Ocorrência *</label>
+            <select name="categoria" id="categoria" required>
+                <option value="">Selecione...</option>
+                <option value="Agressão Física">Agressão Física</option>
+                <option value="Abandono">Abandono</option>
+                <option value="Negligência">Negligência (Sem água/comida/shelter)</option>
+                <option value="Confinamento Inadequado">Confinamento / Acorrentamento</option>
+                <option value="Condições Insalubres">Condições Insalubres</option>
+                <option value="Outros">Outros</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="descricao">Descrição do Ocorrido *</label>
+            <textarea name="descricao" id="descricao" rows="5" placeholder="Descreva o que aconteceu em detalhes..." required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="data_hora">Data e Hora Aproximada</label>
+            <input type="datetime-local" name="data_hora" id="data_hora">
+        </div>
+
+        <div class="form-group">
+            <label for="localizacao">Endereço / Ponto de Referência *</label>
+            <input type="text" name="localizacao" id="localizacao" placeholder="Rua, número próximo, referência..." required>
+        </div>
+
+        <div class="form-group">
+            <label for="municipio_uf">Município / UF *</label>
+            <input type="text" name="municipio_uf" id="municipio_uf" placeholder="Ex: Maceió / AL" required>
+        </div>
+
+        <div class="form-group">
+            <label for="anexos">Anexar Imagens (Opcional - Máx 10MB cada)</label>
+            <input type="file" name="anexos" id="anexos" accept="image/png, image/jpeg" multiple>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar Denúncia</button>
+    </form>
+</section>
+{% endblock %}

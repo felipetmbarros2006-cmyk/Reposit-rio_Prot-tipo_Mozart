@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="container">
+    <h2>Gestão de Denúncias</h2>
+
+    {% if denuncias %}
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Protocolo</th>
+                    <th>Modo</th>
+                    <th>Categoria</th>
+                    <th>Município</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in denuncias %}
+                <tr>
+                    <td><code>{{ d.protocolo }}</code></td>
+                    <td>
+                        {% if d.anonimo %}
+                            <span class="badge-anon">Anônimo</span>
+                        {% else %}
+                            <span class="badge-ident">Identificado ({{ d.denunciante_email }})</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ d.categoria }}</td>
+                    <td>{{ d.municipio_uf }}</td>
+                    <td><span class="badge">{{ d.status }}</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Nenhuma denúncia registrada no momento.</p>
+    {% endif %}
+</section>
+{% endblock %}

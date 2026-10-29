@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="container form-container">
+    <h2>Acompanhar Denúncia</h2>
+    <p>Informe o seu número de protocolo e o código de acompanhamento para consultar o andamento.</p>
+
+    {% if erro %}
+        <div class="alert alert-error">{{ erro }}</div>
+    {% endif %}
+
+    <form action="/acompanhar" method="POST">
+        <div class="form-group">
+            <label for="protocolo">Número do Protocolo *</label>
+            <input type="text" name="protocolo" id="protocolo" placeholder="Ex: 2026-123456" required>
+        </div>
+
+        <div class="form-group">
+            <label for="codigo">Código de Acompanhamento *</label>
+            <input type="password" name="codigo" id="codigo" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Consultar</button>
+    </form>
+
+    {% if resultado %}
+        <hr class="divider">
+        <div class="status-result">
+            <h3>Situação da Denúncia</h3>
+            <p><strong>Status Atual:</strong> <span class="badge">{{ resultado.status }}</span></p>
+            <p><strong>Data de Registro:</strong> {{ resultado.data_registro }}</p>
+            <p><strong>Última Atualização:</strong> {{ resultado.mensagem }}</p>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

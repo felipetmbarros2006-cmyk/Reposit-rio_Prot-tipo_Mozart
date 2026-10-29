@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="container form-container sm-container">
+    <h2>Entrar na Plataforma</h2>
+    <p>Acesse sua conta para consultar suas denúncias identificadas.</p>
+
+    <form action="/login" method="POST">
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" name="email" id="email" placeholder="seuemail@exemplo.com" required>
+        </div>
+
+        <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="password" name="senha" id="senha" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Entrar</button>
+    </form>
+
+    <p class="auth-footer">Não tem conta? <a href="/cadastro">Cadastre-se aqui</a></p>
+    <div class="demo-credentials">
+        <p><strong>Contas de Teste:</strong></p>
+        <p>• Usuário: <code>usuario@email.com</code> / Senha: <code>123</code></p>
+        <p>• Admin: <code>admin@protecao.org</code> / Senha: <code>admin</code></p>
+    </div>
+</section>
+{% endblock %}

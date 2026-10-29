@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="container success-container">
+    <h2>Denúncia Registrada com Sucesso!</h2>
+    <p>Guarde com segurança o seu Número de Protocolo e o Código de Acompanhamento abaixo para consultar o andamento do seu caso.</p>
+    
+    <div class="protocol-box">
+        <p><strong>Número do Protocolo:</strong> <span class="highlight">{{ protocolo }}</span></p>
+        <p><strong>Código de Acompanhamento:</strong> <span class="highlight">{{ codigo }}</span></p>
+    </div>
+
+    <p class="small-text">Aviso: Por razões de privacidade e segurança, estas informações não serão exibidas novamente se você fechar esta página sem salvar.</p>
+    
+    <a href="/acompanhar" class="btn btn-primary">Ir para Acompanhamento</a>
+</section>
+{% endblock %}

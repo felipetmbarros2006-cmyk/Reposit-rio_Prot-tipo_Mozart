@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Denúncia - Proteção Animal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="brand">🐾 Proteção Animal</a>
+            <div class="nav-links">
+                <a href="/">Início</a>
+                <a href="/denunciar">Fazer Denúncia</a>
+                <a href="/acompanhar">Acompanhar</a>
+                <a href="/adocao">Adoção</a>
+                {% if session.get('user_id') %}
+                    {% if session.get('user_role') == 'admin' %}
+                        <a href="/admin/dashboard" class="nav-admin">Painel Adm</a>
+                    {% else %}
+                        <a href="/minhas-denuncias">Minhas Denúncias</a>
+                    {% endif %}
+                    <span class="user-info">Olá, {{ session.get('user_name') }}</span>
+                    <a href="/logout" class="btn-sm btn-logout">Sair</a>
+                {% else %}
+                    <a href="/login" class="btn-sm">Entrar</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Plataforma de Denúncia e Proteção Animal. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
